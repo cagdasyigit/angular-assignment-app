@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.0",
+    "@angular/cdk": "^6.4.7",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
     "@angular/core": "^6.1.0",
@@ -24,6 +25,7 @@
     "@ngrx/effects": "^6.1.0",
     "@ngrx/router-store": "^6.1.0",
     "@ngrx/store": "^6.1.0",
+    "@swimlane/dragula": "^3.7.3",
     "@swimlane/ngx-datatable": "^13.1.0",
     "@swimlane/ngx-dnd": "^5.1.0",
     "core-js": "^2.5.4",
