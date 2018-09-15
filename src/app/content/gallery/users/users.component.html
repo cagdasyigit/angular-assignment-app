@@ -1,1 +1,16 @@
-<mat-card>Simple card</mat-card>
+<mat-card>
+	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
+		<mat-card-title fxFlex="80px" class="pt-12">Users</mat-card-title>
+		<div fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
+			<button mat-button fxFlex="40px" class="pl-12">
+				<i class="far fa-sort-amount-down"></i>
+			</button>
+			<button mat-button fxFlex="40px" class="pl-12">
+				<i class="far fa-search"></i>
+			</button>
+		</div>
+	</mat-card-header>
+	<mat-card-content *ngFor="let user of users$ | async">
+		{{ user.username }}
+	</mat-card-content>
+</mat-card>
