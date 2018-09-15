@@ -36,6 +36,6 @@ export function UsersReducer(state = initialState, action: Actions.GalleryUsersA
             };
 
         default:
-            return initialState;
+            return state;
     }
 }

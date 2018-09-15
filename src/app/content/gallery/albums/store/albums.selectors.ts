@@ -5,10 +5,10 @@ export interface AlbumsAppState {
     albumsState: AlbumsState;
 }
 
-export const albumsFeatureSelector = createFeatureSelector<AlbumsAppState>('gallery');
+export const gallerySelector = createFeatureSelector<AlbumsAppState>('gallery');
 
 export const albumsStateSelector = createSelector(
-    albumsFeatureSelector,
+    gallerySelector,
     (state: AlbumsAppState) => state.albumsState
 );
 

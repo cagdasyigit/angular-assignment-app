@@ -37,6 +37,6 @@ export function AlbumsReducer(state = initialState, action: Actions.GalleryAlbum
             };
 
         default:
-            return initialState;
+            return state;
     }
 }

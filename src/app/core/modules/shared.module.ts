@@ -4,8 +4,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { NgxModule } from './ngx.module';
 import { CommonModule } from '@angular/common';
+import { PerfectScrollbarDirective } from '../directives/perfect-scrollbar';
 
 @NgModule({
+    declarations: [
+        PerfectScrollbarDirective
+    ],
     imports: [
         MaterialModule,
         NgxModule,
@@ -16,7 +20,8 @@ import { CommonModule } from '@angular/common';
         MaterialModule,
         NgxModule,
         FlexLayoutModule,
-        CommonModule
+        CommonModule,
+        PerfectScrollbarDirective
     ]
 })
 export class SharedModule {}

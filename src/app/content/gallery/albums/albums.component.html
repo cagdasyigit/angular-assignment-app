@@ -1,4 +1,4 @@
-<mat-card class="users-card">
+<mat-card class="albums-card">
 	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
 		<mat-card-title fxFlex="80px" class="pt-12">Albums</mat-card-title>
 		<div fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
@@ -8,8 +8,14 @@
 	<mat-card-content class="loading" *ngIf="(albumsState$ | async).loading == true">
 		<mat-spinner></mat-spinner>
 	</mat-card-content>
-	<mat-card-content *ngIf="(albumsState$ | async).error == null && (albumsState$ | async).loading == false">
-		<mat-card mat-ripple class="user-card" *ngFor="let album of albums$ | async">
+	<mat-card-content appScrollbar
+		*ngIf="(albumsState$ | async).error == null
+		&& (albumsState$ | async).loading == false
+		&& (albums$ | async).length > 0">
+		<mat-card mat-ripple
+		          class="album-card"
+		          *ngFor="let album of albums$ | async"
+		          (click)="onClickAlbum(album.id)">
 			<mat-card-header>
 				<div mat-card-avatar class="avatar">
 					<i class="far fa-album"></i>
@@ -19,6 +25,9 @@
 		</mat-card>
 	</mat-card-content>
 	<mat-card-content *ngIf="(albumsState$ | async).error != null" class="p-16">
-		<div>{{ (albumsState$ | async).error.message || 'A problem occured fetching users' }}</div>
+		<div>{{ (albumsState$ | async).error.message || 'A problem occured fetching albums' }}</div>
+	</mat-card-content>
+	<mat-card-content *ngIf="(albums$ | async).length == 0" class="info p-16 pb-32">
+		<div>Please select a user</div>
 	</mat-card-content>
 </mat-card>

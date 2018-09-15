@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/index';
 import { UsersState } from './store/users.reducer';
 import { AlbumsAppState } from '../albums/store/albums.selectors';
 import { FetchGalleryAlbums } from '../albums/store/albums.actions';
+import { ResetPhotos } from '../photos/store/photos.actions';
+import { PhotosAppState } from '../photos/store/photos.selectors';
 
 @Component({
     selector: 'app-gallery-users',
@@ -23,7 +25,8 @@ export class UsersComponent implements OnInit {
 
     constructor(
         private usersStore: Store<UsersAppState>,
-        private albumsStore: Store<AlbumsAppState>
+        private albumsStore: Store<AlbumsAppState>,
+        private photosStore: Store<PhotosAppState>
     ) {
         this.users$ = this.usersStore.select(usersSelector);
         this.usersState$ = this.usersStore.select(usersStateSelector);
@@ -35,5 +38,6 @@ export class UsersComponent implements OnInit {
 
     onClickUser(userId) {
         this.albumsStore.dispatch(new FetchGalleryAlbums(userId));
+        this.photosStore.dispatch(new ResetPhotos());
     }
 }

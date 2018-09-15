@@ -5,10 +5,10 @@ export interface UsersAppState {
     usersState: UsersState;
 }
 
-export const usersFeatureSelector = createFeatureSelector<UsersAppState>('gallery');
+export const gallerySelector = createFeatureSelector<UsersAppState>('gallery');
 
 export const usersStateSelector = createSelector(
-    usersFeatureSelector,
+    gallerySelector,
     (state: UsersAppState) => state.usersState
 );
 

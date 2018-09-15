@@ -1,3 +1,22 @@
-<p>
-  photos works!
-</p>
+<mat-card class="photos-card">
+	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
+		<mat-card-title fxFlex="120px" class="pt-12">{{ (photos$ | async).length }} Photos</mat-card-title>
+	</mat-card-header>
+	<mat-card-content class="loading" *ngIf="(photosState$ | async).loading == true">
+		<mat-spinner></mat-spinner>
+	</mat-card-content>
+	<mat-card-content appScrollbar
+		*ngIf="(photosState$ | async).error == null && (photosState$ | async).loading == false">
+		<mat-card mat-ripple class="photo-card" *ngFor="let photo of photos$ | async">
+			<mat-card-header>
+				<div mat-card-avatar class="avatar">
+					<i class="far fa-album"></i>
+				</div>
+				<mat-card-title>{{ photo.title }}</mat-card-title>
+			</mat-card-header>
+		</mat-card>
+	</mat-card-content>
+	<mat-card-content *ngIf="(photosState$ | async).error != null" class="p-16">
+		<div>{{ (photosState$ | async).error.message || 'A problem occured fetching photos' }}</div>
+	</mat-card-content>
+</mat-card>

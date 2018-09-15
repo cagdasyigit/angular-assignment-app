@@ -1,4 +1,8 @@
 .mat-card.users-card {
+    & > .mat-card-header {
+        background-color: #f9f9f9;
+    }
+
     .mat-card-content {
         overflow: hidden;
 

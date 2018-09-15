@@ -1,5 +1,11 @@
 .gallery {
 
+    .info {
+        text-align: center;
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+
     .content-wrapper {
         display: flex;
         flex-direction: row;
@@ -13,13 +19,18 @@
 
             .mat-card {
                 padding: 0;
+                overflow: hidden;
+                position: relative;
 
                 .mat-card-header {
                     padding: 16px;
-                    background-color: #f9f9f9;
 
-                    i {
-                        font-size: 16px;
+                    button {
+                        height: 40px;
+
+                        i {
+                            font-size: 16px;
+                        }
                     }
 
                     .mat-card-title {
@@ -40,6 +51,14 @@
 
             app-gallery-users {
                 padding-right: 16px;
+                height: 882px;
+
+                .mat-card {
+                    .mat-card-content {
+                        overflow: hidden;
+                        height: 804px;
+                    }
+                }
             }
         }
 
@@ -48,10 +67,32 @@
 
             app-gallery-albums {
                 padding: 0 0 16px 16px;
+                height: 250px;
+                display: flex;
+
+                & > .mat-card {
+                    flex: 1;
+                    
+                    & > .mat-card-content {
+                        height: 168px;
+                        overflow: hidden;
+                    }
+                }
             }
 
             app-gallery-photos {
                 padding: 16px 0 0 16px;
+                height: 600px;
+                display: flex;
+
+                & > .mat-card {
+                    flex: 1;
+
+                    & > .mat-card-content {
+                        height: 518px;
+                        overflow: hidden;
+                    }
+                }
             }
         }
     }
