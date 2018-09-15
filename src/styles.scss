@@ -1,0 +1,18 @@
+@import 'app/core/styles/style-imports.scss';
+
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.page {
+	.content-wrapper {
+		min-width: 1024px;
+	}
+}

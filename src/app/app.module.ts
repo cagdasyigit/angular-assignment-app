@@ -1,13 +1,15 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import {AppComponent} from './app.component';
-import {MaterialModule} from './core/modules/material.module';
-import {GalleryModule} from './content/gallery/gallery.module';
-import {NgxModule} from './core/modules/ngx.module';
+import { AppComponent } from './app.component';
+
+import { NgxModule } from './core/modules/ngx.module';
+import { GalleryModule } from './content/gallery/gallery.module';
 
 const appRoutes: Routes = [{
     path: '**',
@@ -22,8 +24,12 @@ const appRoutes: Routes = [{
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        // Actually, there is no need for router for one page,
+        // But if we want add new pages, we can make sure we are ready to extension (open-close principle)
         RouterModule.forRoot(appRoutes),
-        MaterialModule,
+        // We don't need for root store for now, there is nothing be handled on top
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
         NgxModule,
         GalleryModule
     ],
