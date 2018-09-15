@@ -1,0 +1,32 @@
+.mat-card.users-card {
+    .mat-card-content {
+        overflow: hidden;
+
+        &.loading {
+            padding: 16px;
+        }
+
+        .mat-card.user-card {
+            cursor: pointer;
+
+            .mat-card-header {
+                margin: 0;
+                background-color: #fff;
+
+                .avatar {
+                    background-color: #2196f3;
+                    color: #fff;
+                    border-radius: 50%;
+                    padding: 16px 8px 0 8px;
+                    margin-right: 16px;
+                    text-align: center;
+                    font-size: 16px;
+                }
+
+                .mat-card-title {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

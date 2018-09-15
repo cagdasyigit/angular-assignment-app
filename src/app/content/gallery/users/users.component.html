@@ -1,6 +1,6 @@
-<mat-card>
+<mat-card class="users-card">
 	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
-		<mat-card-title fxFlex="80px" class="pt-12">Users</mat-card-title>
+		<mat-card-title fxFlex="80px" class="pt-16">Users</mat-card-title>
 		<div fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
 			<button mat-button fxFlex="40px" class="pl-12">
 				<i class="far fa-sort-amount-down"></i>
@@ -10,7 +10,25 @@
 			</button>
 		</div>
 	</mat-card-header>
-	<mat-card-content *ngFor="let user of users$ | async">
-		{{ user.username }}
+	<mat-card-content class="loading" *ngIf="(usersState$ | async).loading == true">
+		<mat-spinner></mat-spinner>
+	</mat-card-content>
+	<mat-card-content *ngIf="(usersState$ | async).error == null && (usersState$ | async).loading == false">
+		<mat-card mat-ripple
+		          class="user-card"
+		          *ngFor="let user of users$ | async"
+		          (click)="onClickUser(user.id)">
+			<mat-card-header>
+				<div mat-card-avatar class="avatar">
+					<i class="far fa-user"></i>
+				</div>
+				<mat-card-title>{{ user.name }}</mat-card-title>
+				<mat-card-subtitle>{{ user.username }}</mat-card-subtitle>
+				<mat-card-subtitle class="mb-0">{{ user.email }}</mat-card-subtitle>
+			</mat-card-header>
+		</mat-card>
+	</mat-card-content>
+	<mat-card-content *ngIf="(usersState$ | async).error != null" class="p-16">
+		<div>{{ (usersState$ | async).error.message || 'A problem occured fetching users' }}</div>
 	</mat-card-content>
 </mat-card>

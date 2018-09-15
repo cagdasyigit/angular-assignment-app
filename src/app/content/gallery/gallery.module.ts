@@ -12,6 +12,8 @@ import { UsersComponent } from './users/users.component';
 import { UsersReducer } from './users/store/users.reducer';
 import { UsersEffects } from './users/store/users.effects';
 import { GalleryService } from './gallery.service';
+import { AlbumsReducer } from './albums/store/albums.reducer';
+import { AlbumsEffects } from './albums/store/albums.effects';
 
 const routes: Routes = [{
     path: 'gallery',
@@ -28,10 +30,12 @@ const routes: Routes = [{
     imports: [
         RouterModule.forChild(routes),
         StoreModule.forFeature('gallery', {
-             usersState: UsersReducer
+            usersState: UsersReducer,
+            albumsState: AlbumsReducer
         }),
         EffectsModule.forFeature([
-            UsersEffects
+            UsersEffects,
+            AlbumsEffects
         ]),
         SharedModule
     ],

@@ -13,13 +13,13 @@ export class User {
 
     constructor(user?) {
         user = user || {};
-        user.id = user.id || '';
-        user.name = user.name || '';
-        user.username = user.username || '';
-        user.email = user.email || '';
-        user.address = user.address || new Address();
-        user.phone = user.phone || '';
-        user.website = user.website || '';
-        user.company = user.company || new Company();
+        this.id = user.id || '';
+        this.name = user.name || '';
+        this.username = user.username || '';
+        this.email = user.email || '';
+        this.address = user.address || new Address();
+        this.phone = user.phone || '';
+        this.website = user.website || '';
+        this.company = user.company || new Company();
     }
 }

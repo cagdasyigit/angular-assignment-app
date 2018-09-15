@@ -26,6 +26,7 @@
         "@ngrx/effects": "^6.1.0",
         "@ngrx/router-store": "^6.1.0",
         "@ngrx/store": "^6.1.0",
+        "@ngrx/store-devtools": "^6.1.0",
         "@swimlane/dragula": "^3.7.3",
         "@swimlane/ngx-datatable": "^13.1.0",
         "@swimlane/ngx-dnd": "^5.1.0",

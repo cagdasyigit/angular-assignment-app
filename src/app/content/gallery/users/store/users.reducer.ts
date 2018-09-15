@@ -34,5 +34,8 @@ export function UsersReducer(state = initialState, action: Actions.GalleryUsersA
                 loading: false,
                 error: action.payload
             };
+
+        default:
+            return initialState;
     }
 }

@@ -1,24 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { UsersAppState, usersSelector } from './store/users.selectors';
+import { UsersAppState, usersSelector, usersStateSelector } from './store/users.selectors';
 import { FetchGalleryUsers } from './store/users.actions';
 import { User } from '../../../core/entities/User';
 import { Observable } from 'rxjs/index';
+import { UsersState } from './store/users.reducer';
+import { AlbumsAppState } from '../albums/store/albums.selectors';
+import { FetchGalleryAlbums } from '../albums/store/albums.actions';
 
 @Component({
     selector: 'app-gallery-users',
-    templateUrl: './users.component.html'
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
 
     users$: Observable<User[]>;
 
-    constructor(private usersStore: Store<UsersAppState>) {
+    usersState$: Observable<UsersState>;
+
+    constructor(
+        private usersStore: Store<UsersAppState>,
+        private albumsStore: Store<AlbumsAppState>
+    ) {
+        this.users$ = this.usersStore.select(usersSelector);
+        this.usersState$ = this.usersStore.select(usersStateSelector);
     }
 
     ngOnInit() {
         this.usersStore.dispatch(new FetchGalleryUsers());
-        this.users$ = this.usersStore.select(usersSelector);
+    }
+
+    onClickUser(userId) {
+        this.albumsStore.dispatch(new FetchGalleryAlbums(userId));
     }
 }

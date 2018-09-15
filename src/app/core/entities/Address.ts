@@ -7,10 +7,10 @@ export class Address {
 
     constructor(address?) {
         address = address || {};
-        address.street = address.street || '';
-        address.suite = address.suite || '';
-        address.city = address.city || '';
-        address.zipcode = address.zipcode || '';
-        address.geo = address.geo || { lat: '', lng: '' };
+        this.street = address.street || '';
+        this.suite = address.suite || '';
+        this.city = address.city || '';
+        this.zipcode = address.zipcode || '';
+        this.geo = address.geo || { lat: '', lng: '' };
     }
 }

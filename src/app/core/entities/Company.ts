@@ -5,8 +5,8 @@ export class Company {
 
     constructor(company?) {
         company = company || {};
-        company.name = company.name || '';
-        company.catchPhrase = company.catchPhrase || '';
-        company.bs = company.bs || '';
+        this.name = company.name || '';
+        this.catchPhrase = company.catchPhrase || '';
+        this.bs = company.bs || '';
     }
 }

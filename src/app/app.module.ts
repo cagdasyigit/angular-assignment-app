@@ -5,11 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 
 import { NgxModule } from './core/modules/ngx.module';
 import { GalleryModule } from './content/gallery/gallery.module';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [{
     path: '**',
@@ -30,6 +33,9 @@ const appRoutes: Routes = [{
         // We don't need for root store for now, there is nothing be handled on top
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+        // For debugging store on dev mode
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        StoreRouterConnectingModule,
         NgxModule,
         GalleryModule
     ],
