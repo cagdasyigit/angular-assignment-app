@@ -37,6 +37,10 @@
                         font-size: 18px;
                     }
                 }
+
+                .mat-card-content {
+                    position: relative;
+                }
             }
         }
 
@@ -89,8 +93,14 @@
                     flex: 1;
 
                     & > .mat-card-content {
-                        height: 518px;
+                        height: 462px;
                         overflow: hidden;
+                        margin-bottom: 0;
+                    }
+
+                    & > .mat-card-footer {
+                        height: 56px;
+                        margin: 0;
                     }
                 }
             }

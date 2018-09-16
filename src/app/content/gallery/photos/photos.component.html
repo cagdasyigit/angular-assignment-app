@@ -9,21 +9,17 @@
     </mat-card-content>
 
     <!-- Content -->
-    <mat-card-content appScrollbar class="content"  
+    <mat-card-content appScrollbar class="content p-16 pt-0"  
         fxLayout="row wrap" 
-        fxLayoutAlign="space-between space-between"
+        fxLayoutAlign="space-around space-between"
         *ngIf="(photosState$ | async).error == null && (photosState$ | async).loading == false">
 
         <!-- Photo Card -->
-        <mat-card class="photo-card mb-16" *ngFor="let photo of photos$ | async" fxFlex="280px">
+        <mat-card class="photo-card mb-16" *ngFor="let photo of filteredPhotos" fxFlex="180px">
             <img mat-card-image src="{{ photo.thumbnailUrl }}" alt="photo.title">
             <mat-card-content>
-                <span class="title">{{ photo.title }}</span>
+                <div class="title">{{ photo.title }}</div>
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-            </mat-card-actions>
         </mat-card>
     </mat-card-content>
 
@@ -31,4 +27,13 @@
     <mat-card-content *ngIf="(photosState$ | async).error != null" class="p-16">
         <div>{{ (photosState$ | async).error.message || 'A problem occured fetching photos' }}</div>
     </mat-card-content>
+
+    <!-- Footer -->
+    <mat-card-footer>
+        <mat-paginator [length]="(photos$ | async).length"
+              [(pageSize)]="pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)="setPage($event)">
+        </mat-paginator>
+    </mat-card-footer>
 </mat-card>

@@ -16,12 +16,37 @@ export class PhotosComponent implements OnInit {
 
     photosState$: Observable<PhotosState>;
 
+    unfilteredPhotos: Photo[];
+
+    filteredPhotos: Photo[];
+
+    pageSize: number;
+
+    currentPage: number;
+
     constructor(private albumStore: Store<PhotosAppState>) {
         this.photos$ = this.albumStore.select(photosSelector);
         this.photosState$ = this.albumStore.select(photosStateSelector);
+        this.pageSize = 10;
+        this.currentPage = 0;
     }
 
     ngOnInit() {
+        this.photos$.subscribe((photos: Photo[]) => {
+            this.unfilteredPhotos = photos;
+            this.setFilteredPhotos();
+        });
     }
 
+    setFilteredPhotos() {
+        const startIndex = (this.currentPage * this.pageSize);
+        const endIndex = (this.currentPage * this.pageSize) + this.pageSize;
+        this.filteredPhotos = [...this.unfilteredPhotos].slice(startIndex, endIndex);
+    }
+
+    setPage(pageNumber: {previousPageIndex, pageIndex, pageSize, length}) {
+        this.currentPage = pageNumber.pageIndex;
+        this.pageSize = pageNumber.pageSize;
+        this.setFilteredPhotos();
+    }
 }
