@@ -40,4 +40,16 @@
     .pl-#{$i * 4} {
         padding-left: $i * 4px !important;
     }
+
+    .fs-#{$i * 4} {
+        font-size: $i * 4px;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
 }

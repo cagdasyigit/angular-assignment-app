@@ -1,13 +1,31 @@
 <mat-card class="users-card">
 	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
-		<mat-card-title fxFlex="80px" class="pt-12 mb-12">Users</mat-card-title>
-		<div fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
-			<button mat-button fxFlex="40px" class="pl-12">
+        <mat-card-title fxFlex="80px" class="pt-12 mb-12" *ngIf="headerState === 'title'">Users</mat-card-title>
+        
+        <!-- Search Input -->
+        <div class="search-wrapper w-100" fxFlex fxLayout="row" fxLayoutAlign="start center" *ngIf="headerState === 'search'">
+            <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon>search</mat-icon>
+                <input [(ngModel)]="searchText" type="text" placeholder="Search or start new chat" fxFlex>
+                <button mat-button class="fs-24 pl-0 pr-0" fxFlex="24px" (click)="headerState = 'title'; searchText = '';">&times;</button>
+            </div>
+        </div>
+
+        <!-- Order Controls -->
+		<div *ngIf="headerState === 'title'" fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
+			<button mat-button fxFlex="40px" class="pl-12" [matMenuTriggerFor]="sortMenu">
 				<i class="far fa-sort-amount-down"></i>
 			</button>
-			<button mat-button fxFlex="40px" class="pl-12">
+			<button mat-button fxFlex="40px" class="pl-12" (click)="headerState = 'search'">
 				<i class="far fa-search"></i>
-			</button>
+            </button>
+            
+            <!-- Sort Menu -->
+            <mat-menu #sortMenu="matMenu">
+                <button mat-menu-item *ngFor="let sort of sortSelection" (click)="onSort(sort.value)">
+                    <span>{{ sort.viewValue }}</span>
+                </button>
+            </mat-menu>
 		</div>
     </mat-card-header>
     
@@ -20,7 +38,7 @@
 	<mat-card-content appScrollbar *ngIf="(usersState$ | async).error == null && (usersState$ | async).loading == false">
 		<mat-card mat-ripple
 		          class="user-card"
-		          *ngFor="let user of users$ | async"
+		          *ngFor="let user of users | textFilter: searchText"
 		          (click)="onClickUser(user.id)">
 			<mat-card-header>
 				<div mat-card-avatar class="avatar">

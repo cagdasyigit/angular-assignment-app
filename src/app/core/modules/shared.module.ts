@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from './material.module';
 import { NgxModule } from './ngx.module';
-import { CommonModule } from '@angular/common';
+
 import { PerfectScrollbarDirective } from '../directives/perfect-scrollbar';
-import { FormsModule } from '@angular/forms';
+import { TextFilterPipe } from '../pipes/text-filter.pipe';
 
 @NgModule({
     declarations: [
-        PerfectScrollbarDirective
+        PerfectScrollbarDirective,
+        TextFilterPipe
     ],
     imports: [
         MaterialModule,
@@ -24,6 +27,7 @@ import { FormsModule } from '@angular/forms';
         FlexLayoutModule,
         CommonModule,
         PerfectScrollbarDirective,
+        TextFilterPipe,
         FormsModule
     ]
 })
