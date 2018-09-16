@@ -7,7 +7,8 @@ import { PhotosState } from './store/photos.reducer';
 
 @Component({
     selector: 'app-gallery-photos',
-    templateUrl: './photos.component.html'
+    templateUrl: './photos.component.html',
+    styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
 

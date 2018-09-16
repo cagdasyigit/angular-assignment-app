@@ -9,10 +9,14 @@
 				<i class="far fa-search"></i>
 			</button>
 		</div>
-	</mat-card-header>
+    </mat-card-header>
+    
+    <!-- Loading Spinner -->
 	<mat-card-content class="loading" *ngIf="(usersState$ | async).loading == true">
 		<mat-spinner></mat-spinner>
-	</mat-card-content>
+    </mat-card-content>
+    
+    <!-- Content-->
 	<mat-card-content appScrollbar *ngIf="(usersState$ | async).error == null && (usersState$ | async).loading == false">
 		<mat-card mat-ripple
 		          class="user-card"
@@ -27,7 +31,9 @@
 				<mat-card-subtitle class="mb-0">{{ user.email }}</mat-card-subtitle>
 			</mat-card-header>
 		</mat-card>
-	</mat-card-content>
+    </mat-card-content>
+    
+    <!-- Error -->
 	<mat-card-content *ngIf="(usersState$ | async).error != null" class="p-16">
 		<div>{{ (usersState$ | async).error.message || 'A problem occured fetching users' }}</div>
 	</mat-card-content>

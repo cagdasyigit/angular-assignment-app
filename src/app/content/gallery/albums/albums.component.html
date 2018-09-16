@@ -1,33 +1,38 @@
 <mat-card class="albums-card">
-	<mat-card-header fxLayout="row" fxLayoutAlign="space-between">
-		<mat-card-title fxFlex="80px" class="pt-12">Albums</mat-card-title>
-		<div fxFlex="80px" fxLayout="row" fxLayoutAlign="space-between">
-			Select All
-		</div>
-	</mat-card-header>
-	<mat-card-content class="loading" *ngIf="(albumsState$ | async).loading == true">
-		<mat-spinner></mat-spinner>
-	</mat-card-content>
-	<mat-card-content appScrollbar
-		*ngIf="(albumsState$ | async).error == null
-		&& (albumsState$ | async).loading == false
-		&& (albums$ | async).length > 0">
-		<mat-card mat-ripple
-		          class="album-card"
-		          *ngFor="let album of albums$ | async"
-		          (click)="onClickAlbum(album.id)">
-			<mat-card-header>
-				<div mat-card-avatar class="avatar">
-					<i class="far fa-album"></i>
-				</div>
-				<mat-card-title>{{ album.title }}</mat-card-title>
-			</mat-card-header>
-		</mat-card>
-	</mat-card-content>
-	<mat-card-content *ngIf="(albumsState$ | async).error != null" class="p-16">
-		<div>{{ (albumsState$ | async).error.message || 'A problem occured fetching albums' }}</div>
-	</mat-card-content>
-	<mat-card-content *ngIf="(albums$ | async).length == 0" class="info p-16 pb-32">
-		<div>Please select a user</div>
-	</mat-card-content>
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
+        <mat-card-title fxFlex="80px" class="pt-12">Albums</mat-card-title>
+        <div class="mt-12" fxFlex="100px" fxLayout="row" fxLayoutAlign="space-between">
+            <mat-checkbox [(ngModel)]="isSelectedAll" (click)="onClickSelectAll()">Select All</mat-checkbox>
+        </div>
+    </mat-card-header>
+
+    <!-- Loading Spinner -->
+    <mat-card-content class="loading" *ngIf="(albumsState$ | async).loading == true">
+        <mat-spinner></mat-spinner>
+    </mat-card-content>
+
+    <!-- Content -->
+    <mat-card-content appScrollbar class="p-16 pt-0"
+        fxLayout="row wrap" 
+        fxLayoutAlign="space-between space-between"
+        *ngIf="(albumsState$ | async).error == null
+            && (albumsState$ | async).loading == false
+            && (albums$ | async).length > 0">
+        
+        <!-- Album Checkboxes -->
+        <div mat-ripple class="album-container mb-12" fxFlex="280px"
+            *ngFor="let album of albums$ | async">
+            <mat-checkbox [(ngModel)]="album.isSelected" (click)="onClickAlbumCheckbox()">{{ album.title }}</mat-checkbox>
+        </div>
+    </mat-card-content>
+
+    <!-- Error -->
+    <mat-card-content *ngIf="(albumsState$ | async).error != null" class="p-16">
+        <div>{{ (albumsState$ | async).error.message || 'A problem occured fetching albums' }}</div>
+    </mat-card-content>
+
+    <!-- Info -->
+    <mat-card-content *ngIf="(albums$ | async).length == 0" class="info p-16 pb-32">
+        <div>Please select a user</div>
+    </mat-card-content>
 </mat-card>

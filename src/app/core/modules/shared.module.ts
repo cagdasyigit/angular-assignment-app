@@ -5,6 +5,7 @@ import { MaterialModule } from './material.module';
 import { NgxModule } from './ngx.module';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarDirective } from '../directives/perfect-scrollbar';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -14,14 +15,16 @@ import { PerfectScrollbarDirective } from '../directives/perfect-scrollbar';
         MaterialModule,
         NgxModule,
         FlexLayoutModule,
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     exports: [
         MaterialModule,
         NgxModule,
         FlexLayoutModule,
         CommonModule,
-        PerfectScrollbarDirective
+        PerfectScrollbarDirective,
+        FormsModule
     ]
 })
 export class SharedModule {}

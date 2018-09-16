@@ -2,7 +2,7 @@
 
 @for $i from 0 through 50 {
     .m-#{$i * 4} {
-        margin: $i * 4px !important;
+        margin: $i * 4px;
     }
 
     .mt-#{$i * 4} {
@@ -22,7 +22,7 @@
     }
 
     .p-#{$i * 4} {
-        padding: $i * 4px !important;
+        padding: $i * 4px;
     }
 
     .pt-#{$i * 4} {
