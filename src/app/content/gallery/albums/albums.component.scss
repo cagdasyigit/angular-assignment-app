@@ -1,5 +1,26 @@
-.albums-card {
-    .album-container {
-        position: relative;
+.mat-card.albums-card {
+    overflow: visible !important;
+    position: relative;
+
+    .albums-container {
+        overflow: hidden;
+        
+        .album-container {
+            position: relative;
+        }
+    }
+
+    .new-album {
+        width: 100%;
+        height: 168px !important;
+        position: absolute;
+        top: 82px;
+        background-color: ghostwhite;
+    }
+
+    .mat-card-actions {
+        position: absolute;
+        bottom: 0;
+        right: 32px;
     }
 }

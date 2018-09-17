@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { AlbumsState } from './store/albums.reducer';
 import { PhotosAppState } from '../photos/store/photos.selectors';
 import { FetchGalleryPhotos, ResetPhotos } from '../photos/store/photos.actions';
-import { MatCheckbox } from '@angular/material';
 
 @Component({
     selector: 'app-gallery-albums',
@@ -23,6 +22,8 @@ export class AlbumsComponent implements OnInit {
     albumsState$: Observable<AlbumsState>;
 
     isSelectedAll: boolean;
+
+    renderState: RenderState = RenderState.Create;
 
     constructor(
         private albumStore: Store<AlbumsAppState>,
@@ -91,4 +92,9 @@ export class AlbumsComponent implements OnInit {
             this.getPhotos();
         });
     }
+}
+
+enum RenderState {
+    List = 'list',
+    Create = 'create'
 }
