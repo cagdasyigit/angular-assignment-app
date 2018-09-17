@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { NgxModule } from './core/modules/ngx.module';
 import { GalleryModule } from './content/gallery/gallery.module';
 import { environment } from '../environments/environment';
+import { AppHttpInterceptor } from './core/services/app-http-interceptor';
+import { AuthService } from './core/services/auth-service';
 
 const appRoutes: Routes = [{
     path: '**',
@@ -39,7 +41,14 @@ const appRoutes: Routes = [{
         NgxModule,
         GalleryModule
     ],
-    providers: [],
+    providers: [
+        AuthService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppHttpInterceptor,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

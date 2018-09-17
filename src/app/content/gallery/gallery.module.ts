@@ -17,10 +17,12 @@ import { AlbumsReducer } from './albums/store/albums.reducer';
 import { AlbumsEffects } from './albums/store/albums.effects';
 import { PhotosReducer } from './photos/store/photos.reducer';
 import { PhotosEffects } from './photos/store/photos.effects';
+import { GalleryGuard } from './gallery.guard';
 
 const routes: Routes = [{
     path: 'gallery',
-    component: GalleryComponent
+    component: GalleryComponent,
+    canActivate: [ GalleryGuard ]
 }];
 
 @NgModule({
@@ -48,7 +50,8 @@ const routes: Routes = [{
         GalleryComponent
     ],
     providers: [
-        GalleryService
+        GalleryService,
+        GalleryGuard
     ]
 })
 export class GalleryModule {}
