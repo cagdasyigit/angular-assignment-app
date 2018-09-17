@@ -5,6 +5,8 @@ export const FETCH_GALLERY_USERS = 'FETCH_GALLERY_USERS';
 export const FETCH_GALLERY_USERS_SUCCESS = 'FETCH_GALLERY_USERS_SUCCESS';
 export const FETCH_GALLERY_USERS_FAIL = 'FETCH_GALLERY_USERS_FAIL';
 
+export const SELECT_GALLERY_USER = 'SELECT_GALLERY_USER';
+
 export class FetchGalleryUsers implements Action {
     readonly type = FETCH_GALLERY_USERS;
 }
@@ -21,6 +23,13 @@ export class FetchGalleryUsersFail implements Action {
     constructor(public payload: string) {}
 }
 
+export class SelectUser implements Action {
+    readonly type = SELECT_GALLERY_USER;
+
+    constructor(public payload: User) {}
+}
+
 export type GalleryUsersActions = FetchGalleryUsers |
     FetchGalleryUsersSuccess |
-    FetchGalleryUsersFail;
+    FetchGalleryUsersFail |
+    SelectUser;

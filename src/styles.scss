@@ -20,7 +20,7 @@ body {
         position: relative;
 
         .banner {
-            position: absolute;
+            position: fixed;
             z-index: 0;
             background-image: url(assets/image/banner.jpg);
             background-size: cover;

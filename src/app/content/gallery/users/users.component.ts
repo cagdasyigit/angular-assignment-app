@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/index';
 
-import { UsersAppState, usersSelector, usersStateSelector } from './store/users.selectors';
-import { FetchGalleryUsers, FetchGalleryUsersSuccess } from './store/users.actions';
+import { UsersAppState, usersSelector, usersStateSelector, selectedUserSelector } from './store/users.selectors';
+import { FetchGalleryUsers, FetchGalleryUsersSuccess, SelectUser } from './store/users.actions';
 import { User } from '../../../core/entities/User';
 import { UsersState } from './store/users.reducer';
 import { AlbumsAppState } from '../albums/store/albums.selectors';
@@ -22,6 +22,8 @@ export class UsersComponent implements OnInit {
     users: User[];
 
     usersState$: Observable<UsersState>;
+
+    selectedUser: User;
 
     headerState: HeaderState;
 
@@ -51,6 +53,7 @@ export class UsersComponent implements OnInit {
     ) {
         this.users = [];
         this.usersState$ = this.usersStore.select(usersStateSelector);
+        this.selectedUser = new User();
         this.headerState = HeaderState.Title;
     }
 
@@ -61,8 +64,10 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    onClickUser(userId) {
-        this.albumsStore.dispatch(new FetchGalleryAlbums(userId));
+    onClickUser(user: User) {
+        this.selectedUser = user;
+        this.usersStore.dispatch(new SelectUser(user));
+        this.albumsStore.dispatch(new FetchGalleryAlbums(user.id));
         this.photosStore.dispatch(new ResetPhotos());
     }
 

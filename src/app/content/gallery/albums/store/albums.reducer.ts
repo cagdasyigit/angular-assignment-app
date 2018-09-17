@@ -18,7 +18,7 @@ export function AlbumsReducer(state = initialState, action: Actions.GalleryAlbum
         case Actions.FETCH_GALLERY_ALBUMS:
             return {
                 albums: [],
-                error: false,
+                error: null,
                 loading: true
             };
 
@@ -27,6 +27,27 @@ export function AlbumsReducer(state = initialState, action: Actions.GalleryAlbum
                 albums: action.payload,
                 loading: false,
                 error: null
+            };
+
+        case Actions.FETCH_GALLERY_ALBUMS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+
+        case Actions.CREATE_GALLERY_ALBUM:
+            return {
+                ...state,
+                error: null,
+                loading: true
+            };
+
+        case Actions.CREATE_GALLERY_ALBUM_SUCCESS:
+            return {
+                ...state,
+                albums: [action.payload, ...state.albums],
+                loading: false
             };
 
         case Actions.FETCH_GALLERY_ALBUMS_FAIL:

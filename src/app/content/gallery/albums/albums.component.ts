@@ -1,12 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, PartialObserver } from 'rxjs/index';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/index';
+import { Store } from '@ngrx/store';
 
 import { Album } from '../../../core/entities/Album';
 import { AlbumsAppState, albumsSelector, albumsStateSelector } from './store/albums.selectors';
-import { Store } from '@ngrx/store';
 import { AlbumsState } from './store/albums.reducer';
 import { PhotosAppState } from '../photos/store/photos.selectors';
 import { FetchGalleryPhotos, ResetPhotos } from '../photos/store/photos.actions';
+import { UsersAppState, selectedUserSelector } from '../users/store/users.selectors';
+import { User } from '../../../core/entities/User';
+import { CreateGalleryAlbum } from './store/albums.actions';
 
 @Component({
     selector: 'app-gallery-albums',
@@ -21,13 +24,18 @@ export class AlbumsComponent implements OnInit {
 
     albumsState$: Observable<AlbumsState>;
 
+    selectedUser: User;
+
     isSelectedAll: boolean;
 
-    renderState: RenderState = RenderState.Create;
+    renderState: RenderState = RenderState.List;
+
+    newAlbumTitle = '';
 
     constructor(
         private albumStore: Store<AlbumsAppState>,
-        private photoStore: Store<PhotosAppState>
+        private photoStore: Store<PhotosAppState>,
+        private usersStore: Store<UsersAppState>
     ) {
         this.albums = [];
         this.albums$ = this.albumStore.select(albumsSelector);
@@ -39,7 +47,12 @@ export class AlbumsComponent implements OnInit {
             if (albums != null) {
                 this.albums = albums;
                 this.isSelectedAll = false;
+                this.newAlbumTitle = '';
             }
+        });
+
+        this.usersStore.select(selectedUserSelector).subscribe((user: User) => {
+            this.selectedUser = user;
         });
     }
 
@@ -64,6 +77,16 @@ export class AlbumsComponent implements OnInit {
         } else {
             this.photoStore.dispatch(new FetchGalleryPhotos(queryString));
         }
+    }
+
+    saveAlbum() {
+        this.renderState = RenderState.List;
+        this.albumStore.dispatch(
+            new CreateGalleryAlbum(
+                new Album({
+                    userId: this.selectedUser.id,
+                    title: this.newAlbumTitle
+                })));
     }
 
     onClickSelectAll() {

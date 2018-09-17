@@ -23,4 +23,8 @@ export class GalleryService {
     public getPhotos(albumsQueryString: string): Observable<Photo[]> {
         return this.http.get<Photo[]>(environment.apiRoot + '/photos' + albumsQueryString);
     }
+
+    public saveAlbum(album: Album): Observable<Album> {
+        return this.http.post<Album>(environment.apiRoot + '/albums', album);
+    }
 }

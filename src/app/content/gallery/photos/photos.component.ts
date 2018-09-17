@@ -24,7 +24,7 @@ export class PhotosComponent implements OnInit {
 
     currentPage: number;
 
-    selectedSort = '';
+    selectedSort = 'title';
 
     sortSelection = [
         { value: 'title', viewValue: 'A-Z' },
@@ -40,7 +40,18 @@ export class PhotosComponent implements OnInit {
 
     ngOnInit() {
         this.photos$.subscribe((photos: Photo[]) => {
-            this.unfilteredPhotos = photos;
+            this.unfilteredPhotos = photos.sort((prev: Photo, next: Photo) => {
+                switch (this.selectedSort) {
+                    case 'title':
+                        return prev.title > next.title ? 1 : -1;
+    
+                    case 'eltit':
+                        return next.title > prev.title ? 1 : -1;
+    
+                    default:
+                        return 0;
+                }
+            });
             this.setFilteredPhotos();
         });
     }
@@ -59,7 +70,7 @@ export class PhotosComponent implements OnInit {
 
     onSort(value: string) {
         this.selectedSort = value;
-        this.filteredPhotos = this.filteredPhotos.sort((prev: Photo, next: Photo) => {
+        this.unfilteredPhotos = this.unfilteredPhotos.sort((prev: Photo, next: Photo) => {
             switch (value) {
                 case 'title':
                     return prev.title > next.title ? 1 : -1;
@@ -71,5 +82,8 @@ export class PhotosComponent implements OnInit {
                     return 0;
             }
         });
+
+        // Reset Filtered Photos
+        this.setFilteredPhotos();
     }
 }

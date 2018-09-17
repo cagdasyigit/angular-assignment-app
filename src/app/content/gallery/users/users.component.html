@@ -55,9 +55,10 @@
     <!-- Content-->
 	<mat-card-content appScrollbar *ngIf="(usersState$ | async).error == null && (usersState$ | async).loading == false">
 		<mat-card mat-ripple
-		          class="user-card"
+                  class="user-card"
+                  [ngClass]="{'selected': user.id === selectedUser.id}"
 		          *ngFor="let user of users | textFilter: searchText"
-		          (click)="onClickUser(user.id)">
+		          (click)="onClickUser(user)">
 			<mat-card-header>
 				<div mat-card-avatar class="avatar">
 					<i class="far fa-user"></i>

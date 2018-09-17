@@ -25,4 +25,15 @@ export class AlbumsEffects {
             map((albums: Album[]) => new AlbumsActions.FetchGalleryAlbumsSuccess(albums)),
             catchError(err => of(new AlbumsActions.FetchGalleryAlbumsFail(err)))
         );
+
+    @Effect()
+    saveAlbum = this.actions$
+        .ofType<AlbumsActions.CreateGalleryAlbum>(AlbumsActions.CREATE_GALLERY_ALBUM)
+        .pipe(
+            switchMap((action: AlbumsActions.CreateGalleryAlbum): Observable<Album> => {
+                return this.galleryService.saveAlbum(action.payload);
+            }),
+            map((album: Album) => new AlbumsActions.CreateGalleryAlbumSuccess(album)),
+            catchError(err => of(new AlbumsActions.CreateGalleryAlbumFail(err)))
+        );
 }

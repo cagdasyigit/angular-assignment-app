@@ -1,7 +1,7 @@
 <mat-card class="albums-card">
     <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
         <mat-card-title fxFlex="80px" class="pt-12">Albums</mat-card-title>
-        <div class="mt-12" fxFlex="100px" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="mt-12" fxFlex="100px" fxLayout="row" fxLayoutAlign="space-between" *ngIf="renderState === 'list'">
             <mat-checkbox [(ngModel)]="isSelectedAll" (click)="onClickSelectAll()">Select All</mat-checkbox>
         </div>
     </mat-card-header>
@@ -37,16 +37,20 @@
     </mat-card-content>
 
     <!-- New Album Form -->
-    <mat-card-content class="new-album" *ngIf="renderState === 'create'">
-        <form name="newAlbum">
-            <mat-form-field>
-                <input matInput name="title" placeholder="Album Title">
+    <mat-card-content appScrollbar class="new-album" *ngIf="renderState === 'create' && (albumsState$ | async).error == null">
+        <form name="newAlbum" fxLayoutAlign="space-between start">
+            <mat-form-field fxFlex="50">
+                <input matInput name="user" placeholder="User" value="{{ selectedUser.name }}" disabled/>
+            </mat-form-field>
+            <div fxFlex="32px"></div>
+            <mat-form-field fxFlex="50">
+                <input matInput name="title" placeholder="Album Title" [(ngModel)]="newAlbumTitle">
             </mat-form-field>
         </form>
     </mat-card-content>
 
     <!-- Actions -->
-    <mat-card-actions *ngIf="(albums$ | async).length == 0">
+    <mat-card-actions *ngIf="(albums$ | async).length != 0">
         <button class="add-album" mat-mini-fab color="accent" (click)="renderState = 'create'" *ngIf="renderState === 'list'">
             <span class="far fa-plus"></span>
         </button>

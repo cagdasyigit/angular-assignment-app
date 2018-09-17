@@ -16,3 +16,8 @@ export const usersSelector = createSelector(
     usersStateSelector,
     (state: UsersState) => state.users
 );
+
+export const selectedUserSelector = createSelector(
+    usersStateSelector,
+    (state: UsersState) => state.selectedUser
+);
