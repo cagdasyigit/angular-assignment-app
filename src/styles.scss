@@ -30,14 +30,87 @@ body {
             width: 100%;
         }
     }
+
+    main {
+        .page {
+            z-index: 1;
+            min-width: 1088px;
+        
+            .content-wrapper {
+                width: 1024px;
+                margin: 32px auto;
+            }
+        }
+    }
+
+    /* Ngx Drag & Drop */
+    .ngx-dnd-container.dnd-default {        
+        .ngx-dnd-item {            
+            margin: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid lightblue;
+
+            &:hover {
+                border: 1px solid blue;
+            }
+        }
+    }
+
+    .ngx-dnd-container {        
+        .ngx-dnd-item {
+            transition: opacity 0.4s ease-in-out;
+            display: block;
+            &:not(.has-handle):not(.move-disabled),
+            &.has-handle [ngxdraghandle],
+            &.has-handle [ngxDragHandle] {
+                cursor: move;
+                cursor: grab;
+                cursor: -moz-grab;
+                cursor: -webkit-grab;
+            }
+            .ngx-dnd-content {
+                user-select: none;
+            }
+        }
+    }
+    
+    .gu-mirror {
+        position: fixed !important;
+        margin: 0 !important;
+        z-index: 9999 !important;
+        opacity: 0.8;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+        filter: alpha(opacity=80);
+    }
+
+    .gu-hide {
+        display: none !important;
+    }
+
+    .gu-unselectable {
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+    }
+
+    .gu-transit {
+        opacity: 0.2;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+        filter: alpha(opacity=20);
+    }
+
+    .dropzone {
+        border: 2px dashed #ddd !important;
+    }
+
+    .dropzone:after {
+        content: "You can drop albums here";
+        color: #ddd;
+        position: absolute;
+        top: 200px;
+        font-size: 30px;
+    }
 }
 
-.page {
-    z-index: 1;
-    min-width: 1088px;
-
-	.content-wrapper {
-		width: 1024px;
-        margin: 32px auto;
-	}
-}

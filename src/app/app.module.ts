@@ -38,7 +38,6 @@ const appRoutes: Routes = [{
         // For debugging store on dev mode
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         StoreRouterConnectingModule,
-        NgxModule,
         GalleryModule
     ],
     providers: [

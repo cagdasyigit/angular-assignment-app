@@ -27,7 +27,8 @@
     </mat-card-content>
 
     <!-- Content -->
-    <mat-card-content appScrollbar class="content p-16 pt-0"  
+    <mat-card-content appScrollbar class="content p-16 pt-0"  [ngClass]="{'dropzone': (photos$ | async).length === 0}"
+        ngxDroppable="photos-dropzone" (drop)="onDrop($event)"
         fxLayout="row wrap" 
         fxLayoutAlign="space-around space-between"
         *ngIf="(photosState$ | async).error == null && (photosState$ | async).loading == false">

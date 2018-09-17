@@ -48,6 +48,7 @@ export class AlbumsComponent implements OnInit {
                 this.albums = albums;
                 this.isSelectedAll = false;
                 this.newAlbumTitle = '';
+                this.getPhotos();
             }
         });
 

@@ -4,6 +4,9 @@ import { Observable } from 'rxjs/index';
 import { Photo } from '../../../core/entities/Photo';
 import { PhotosAppState, photosSelector, photosStateSelector } from './store/photos.selectors';
 import { PhotosState } from './store/photos.reducer';
+import { Album } from '../../../core/entities/Album';
+import { AlbumsAppState, albumsSelector } from '../albums/store/albums.selectors';
+import { FetchGalleryAlbumsSuccess } from '../albums/store/albums.actions';
 
 @Component({
     selector: 'app-gallery-photos',
@@ -11,6 +14,8 @@ import { PhotosState } from './store/photos.reducer';
     styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
+
+    albums: Album[];
 
     photos$: Observable<Photo[]>;
 
@@ -31,9 +36,12 @@ export class PhotosComponent implements OnInit {
         { value: 'eltit', viewValue: 'Z-A' }
     ];
 
-    constructor(private albumStore: Store<PhotosAppState>) {
-        this.photos$ = this.albumStore.select(photosSelector);
-        this.photosState$ = this.albumStore.select(photosStateSelector);
+    constructor(
+        private photoStore: Store<PhotosAppState>,
+        private albumStore: Store<AlbumsAppState>
+    ) {
+        this.photos$ = this.photoStore.select(photosSelector);
+        this.photosState$ = this.photoStore.select(photosStateSelector);
         this.pageSize = 10;
         this.currentPage = 0;
     }
@@ -44,15 +52,19 @@ export class PhotosComponent implements OnInit {
                 switch (this.selectedSort) {
                     case 'title':
                         return prev.title > next.title ? 1 : -1;
-    
+
                     case 'eltit':
                         return next.title > prev.title ? 1 : -1;
-    
+
                     default:
                         return 0;
                 }
             });
             this.setFilteredPhotos();
+        });
+
+        this.albumStore.select(albumsSelector).subscribe((albums: Album[]) => {
+            this.albums = albums;
         });
     }
 
@@ -85,5 +97,16 @@ export class PhotosComponent implements OnInit {
 
         // Reset Filtered Photos
         this.setFilteredPhotos();
+    }
+
+    onDrop(event: { dropIndex: number, el: HTMLElement, source: HTMLElement, type: string, value: any }) {
+        // Remove dropped element
+        event.el.remove();
+
+        // Cast any type value to Album
+        const album: Album = event.value;
+        const index = this.albums.findIndex(albumInArray => albumInArray.id === album.id);
+        this.albums[index].isSelected = true;
+        this.albumStore.dispatch(new FetchGalleryAlbumsSuccess(this.albums));
     }
 }

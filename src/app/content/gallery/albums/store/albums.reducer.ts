@@ -24,7 +24,7 @@ export function AlbumsReducer(state = initialState, action: Actions.GalleryAlbum
 
         case Actions.FETCH_GALLERY_ALBUMS_SUCCESS:
             return {
-                albums: action.payload,
+                albums: [...action.payload],
                 loading: false,
                 error: null
             };

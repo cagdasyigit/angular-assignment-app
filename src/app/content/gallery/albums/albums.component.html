@@ -18,8 +18,9 @@
             && (albums$ | async).length > 0">
         
         <!-- Album Checkboxes -->
-        <div appScrollbar class="albums-container" fxLayout="row wrap" fxLayoutAlign="space-between space-between">
-            <div mat-ripple class="album-container mb-12" fxFlex="280px"
+        <div appScrollbar ngxDroppable [model]="albums" [copy]="true" class="albums-container ngx-dnd-container"  
+            fxLayout="row wrap" fxLayoutAlign="space-between space-between">
+            <div mat-ripple ngxDraggable="['photos-dropzone']" [model]="album" class="album-container ngx-dnd-item mb-12" fxFlex="280px"
                 *ngFor="let album of albums$ | async">
                 <mat-checkbox [(ngModel)]="album.isSelected" (click)="onClickAlbumCheckbox()">{{ album.title }}</mat-checkbox>
             </div>
