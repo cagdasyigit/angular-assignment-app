@@ -27,13 +27,21 @@ export class UsersComponent implements OnInit {
 
     searchText = '';
 
-    sortSelection = [
-        { value: 'name', viewValue: 'Sort By Name (A-Z)' },
-        { value: 'eman', viewValue: 'Sort By Name (Z-A)' },
-        { value: 'username', viewValue: 'Sort By Username (A-Z)' },
-        { value: 'emanresu', viewValue: 'Sort By Username (Z-A)' },
-        { value: 'email', viewValue: 'Sort By Email (A-Z)' },
-        { value: 'liame', viewValue: 'Sort By Email (Z-A)' }
+    selectedSort = '';
+
+    sortSelectionByName = [
+        { value: 'name', viewValue: 'A-Z' },
+        { value: 'eman', viewValue: 'Z-A' }
+    ];
+
+    sortSelectionByUsername = [
+        { value: 'username', viewValue: 'A-Z' },
+        { value: 'emanresu', viewValue: 'Z-A' }
+    ];
+
+    sortSelectionByEmail = [
+        { value: 'email', viewValue: 'A-Z' },
+        { value: 'liame', viewValue: 'Z-A' }
     ];
 
     constructor(
@@ -59,6 +67,7 @@ export class UsersComponent implements OnInit {
     }
 
     onSort(value: string) {
+        this.selectedSort = value;
         this.users = this.users.sort((prev: User, next: User) => {
             switch (value) {
                 case 'name':
@@ -83,9 +92,6 @@ export class UsersComponent implements OnInit {
                     return 0;
             }
         });
-
-        // Let everyone know sort is changed in state data
-        this.usersStore.dispatch(new FetchGalleryUsersSuccess(this.users));
     }
 }
 

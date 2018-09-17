@@ -1,5 +1,6 @@
 // angular-material
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import './material-customizations.scss';
 
 // ngx-datatable
 @import '~@swimlane/ngx-datatable/release/index.css';
@@ -7,7 +8,7 @@
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 // util styles
-@import './util-styles';
+@import './util-styles.scss';
 
 // fonts
-@import './fonts';
+@import './fonts.scss';

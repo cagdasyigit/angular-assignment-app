@@ -1,6 +1,24 @@
 <mat-card class="photos-card">
     <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
         <mat-card-title fxFlex="120px" class="pt-12">{{ (photos$ | async).length }} Photos</mat-card-title>
+
+        <!-- Order Controls -->
+		<div fxFlex="40px" fxLayout="row" fxLayoutAlign="space-between">
+			<button mat-button fxFlex="40px" class="pl-12" [matMenuTriggerFor]="sortMenu">
+				<i class="far fa-sort-amount-down"></i>
+			</button>
+            
+            <!-- Sort Menu -->
+            <mat-menu #sortMenu="matMenu">
+                <button mat-menu-item (click)="onSort('title')" class="text-center">Title</button>
+                <button mat-menu-item *ngFor="let sort of sortSelection" (click)="onSort(sort.value)" fxLayoutAlign="space-between center">
+                    <div>
+                        <span *ngIf="selectedSort === sort.value" class="far fa-check"></span>
+                    </div>
+                    <span class="mr-24">{{ sort.viewValue }}</span>
+                </button>
+            </mat-menu>
+		</div>
     </mat-card-header>
 
     <!-- Loading Spinner -->

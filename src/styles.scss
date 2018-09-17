@@ -9,9 +9,31 @@ html, body {
 
 body {
     font-family: 'Roboto', sans-serif;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #eee;
+
+    header {
+        position: relative;
+
+        .banner {
+            position: absolute;
+            z-index: 0;
+            background-image: url(assets/image/banner.jpg);
+            background-size: cover;
+            background-position: center bottom;
+            height: 450px;
+            opacity: 0.6;
+            width: 100%;
+        }
+    }
 }
 
 .page {
+    z-index: 1;
     min-width: 1088px;
 
 	.content-wrapper {

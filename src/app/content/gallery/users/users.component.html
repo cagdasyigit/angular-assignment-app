@@ -21,9 +21,27 @@
             </button>
             
             <!-- Sort Menu -->
-            <mat-menu #sortMenu="matMenu">
-                <button mat-menu-item *ngFor="let sort of sortSelection" (click)="onSort(sort.value)">
-                    <span>{{ sort.viewValue }}</span>
+            <mat-menu #sortMenu="matMenu" class="users-sort-menu">
+                <button mat-menu-item (click)="onSort('name')" class="text-center">Name</button>
+                <button mat-menu-item *ngFor="let sort of sortSelectionByName" (click)="onSort(sort.value)" fxLayoutAlign="space-between center">
+                    <div>
+                        <span *ngIf="selectedSort === sort.value" class="far fa-check"></span>
+                    </div>
+                    <span class="mr-24">{{ sort.viewValue }}</span>
+                </button>
+                <button mat-menu-item (click)="onSort('username')" class="text-center">Username</button>
+                <button mat-menu-item *ngFor="let sort of sortSelectionByUsername" (click)="onSort(sort.value)" fxLayoutAlign="space-between center">
+                    <div>
+                        <span *ngIf="selectedSort === sort.value" class="far fa-check"></span>
+                    </div>
+                    <span class="mr-24">{{ sort.viewValue }}</span>
+                </button>
+                <button mat-menu-item (click)="onSort('email')" class="text-center">Email</button>
+                <button mat-menu-item *ngFor="let sort of sortSelectionByEmail" (click)="onSort(sort.value)" fxLayoutAlign="space-between center">
+                    <div>
+                        <span *ngIf="selectedSort === sort.value" class="far fa-check"></span>
+                    </div>
+                    <span class="mr-24">{{ sort.viewValue }}</span>
                 </button>
             </mat-menu>
 		</div>

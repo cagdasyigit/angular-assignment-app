@@ -24,6 +24,13 @@ export class PhotosComponent implements OnInit {
 
     currentPage: number;
 
+    selectedSort = '';
+
+    sortSelection = [
+        { value: 'title', viewValue: 'A-Z' },
+        { value: 'eltit', viewValue: 'Z-A' }
+    ];
+
     constructor(private albumStore: Store<PhotosAppState>) {
         this.photos$ = this.albumStore.select(photosSelector);
         this.photosState$ = this.albumStore.select(photosStateSelector);
@@ -48,5 +55,21 @@ export class PhotosComponent implements OnInit {
         this.currentPage = pageNumber.pageIndex;
         this.pageSize = pageNumber.pageSize;
         this.setFilteredPhotos();
+    }
+
+    onSort(value: string) {
+        this.selectedSort = value;
+        this.filteredPhotos = this.filteredPhotos.sort((prev: Photo, next: Photo) => {
+            switch (value) {
+                case 'title':
+                    return prev.title > next.title ? 1 : -1;
+
+                case 'eltit':
+                    return next.title > prev.title ? 1 : -1;
+
+                default:
+                    return 0;
+            }
+        });
     }
 }
