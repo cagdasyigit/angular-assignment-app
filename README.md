@@ -1,27 +1,34 @@
-# ExbAlbum
+# Angular Assignment App
+## (For An Interview)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+This project developed for demonstrating the front end skills with angular framework. It has requirements and nice to have like written down below:
 
-## Development server
+## General Requirements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+• Minimum resolution of 1024x768 px
+• We use only latest version of Chrome
+• We use header token based authentication
+• Rest calls may take some time or possibly fail
 
-## Code scaffolding
+## Mandatory features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+• Implementation based on the concept/design you find in the Zeplin project
+• Possibility to select a user and an album
+• Ability to search for users
+• Display of albums and pictures
+• The user should be able to create a new album via the blue plus button, make your own implementation
 
-## Build
+## Nice-to-Have features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+• Sorting
+• Drag and Drop of albums to pictures section
+• Filters for user
+• A progress indicator for the loading of the pictures
+• Pagination
 
-## Running unit tests
+## Technical requirements
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+• It should be solved by using any frontend framework like Angular 2 (prefered) or REACT or
+other
+• You can also use additional libs/tools like Angular material its up to you
+• You're free to use any additional technology or framework suiting the task
