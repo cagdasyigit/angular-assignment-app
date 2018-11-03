@@ -1,5 +1,4 @@
-# Angular Assignment App
-## (For An Interview)
+# Angular Gallery App
 
 This project developed for demonstrating the front end skills with angular framework. It has requirements and nice to have like written down below:
 
